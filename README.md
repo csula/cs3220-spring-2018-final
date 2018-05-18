@@ -28,20 +28,26 @@ npm run build
 
 | File name | Points |
 | :-- | :-- |
-| `TodoDAO.java` | 3 |
+| `schema.sql` | 0.5 |
+| `TodoDAO.java` | 2 |
 | `TodoServlet.java` | 1 |
+| `index.jsp` | 1 |
 | `EditTodoServlet.java` | 1 |
-| `CompleteTodoServlet.java` | 1 |
-| `TodoPomodoroServlet.java` | 1 |
-| `pomodoro.js` | 3 |
+| `edit.jsp` | 0.5 |
+| `CompleteTodoServlet.java` | 0.5 |
+| `TodoPomodoroServlet.java` | 0.5 |
+| `pomodoro.jsp` | 1 |
+| `pomodoro.js` | 2 |
 
 ## Requirements
 
 ### Technical
 
+* Application should work in CS 3 server
 * No HTML code in Java Servlet
 * No Java code in JSP
 * Use TodoDAO in all Servlets
+* JSP should all be hidden behind `WEB-INF` folder
 
 ### Functional
 
