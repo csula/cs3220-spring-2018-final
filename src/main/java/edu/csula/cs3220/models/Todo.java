@@ -4,14 +4,15 @@ public class Todo {
 	private int id;
 	private String description;
 	private boolean completed;
+	private int pomodoroCounter;
 
-	public Todo() {
-	}
+	public Todo() { }
 
-	public Todo(int id, String description, boolean completed) {
+	public Todo(int id, String description, boolean completed, int pomodoroCounter) {
 		this.id = id;
 		this.description = description;
 		this.completed = completed;
+		this.pomodoroCounter = pomodoroCounter;
 	}
 
 	public int getId() {
@@ -35,6 +36,13 @@ public class Todo {
 		this.completed = completed;
 	}
 
+	public int getPomodoroCounter() {
+		return pomodoroCounter;
+	}
+	public void setPomodoroCounter(int pomodoroCounter) {
+		this.pomodoroCounter = pomodoroCounter;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -43,7 +51,8 @@ public class Todo {
 		final Todo todo = (Todo) obj;
 		return this.id == todo.id &&
 			this.description.equals(todo.description) &&
-			this.completed == todo.completed;
+			this.completed == todo.completed &&
+			this.pomodoroCounter == todo.pomodoroCounter;
 	}
 
 	@Override
