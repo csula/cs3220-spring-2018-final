@@ -4,5 +4,5 @@ matrix:
       node_js:
         - "8"
       before_script:
-        - cd client
+        - cd client && npm install
     - language: java
