@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.csula.cs3220.storage.*;
+
 @WebServlet("/todo/edit")
 public class EditTodoServlet extends HttpServlet {
 	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: implement rendering the todo edit.jsp page
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println(
-			String.format("<h1>%s!</h1>", "Hello Edit Todo")
-		);
 	}
 
 	public void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 

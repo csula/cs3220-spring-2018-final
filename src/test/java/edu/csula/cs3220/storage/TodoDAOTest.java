@@ -25,6 +25,7 @@ public class TodoDAOTest {
 		when(rs.getInt(1)).thenReturn(1);
 		when(rs.getString(2)).thenReturn("first todo");
 		when(rs.getBoolean(3)).thenReturn(false);
+		when(rs.getInt(4)).thenReturn(0);
 
 		Statement stmt = mock(Statement.class); 
 		when(stmt.executeQuery(TodoDAO.getAllQuery)).thenReturn(rs);
@@ -39,7 +40,7 @@ public class TodoDAOTest {
 
 		// set up initial mock state
 		List<Todo> mock = new ArrayList<>();
-		mock.add(new Todo(1, "first todo", false));
+		mock.add(new Todo(1, "first todo", false, 0));
 
 		// actual method execution
 		List<Todo> actual = dao.getAll();
@@ -55,6 +56,7 @@ public class TodoDAOTest {
 		when(rs.getInt(1)).thenReturn(1);
 		when(rs.getString(2)).thenReturn("first todo");
 		when(rs.getBoolean(3)).thenReturn(false);
+		when(rs.getInt(4)).thenReturn(0);
 
 		PreparedStatement stmt = mock(PreparedStatement.class); 
 		doNothing().when(stmt).setInt(anyInt(), anyInt());
@@ -73,7 +75,7 @@ public class TodoDAOTest {
 
 		// assert and verify
 		assertTrue(actual.isPresent());
-		assertEquals(actual.get(), new Todo(1, "first todo", false));
+		assertEquals(actual.get(), new Todo(1, "first todo", false, 0));
 	}
 
 	@Test
@@ -92,7 +94,7 @@ public class TodoDAOTest {
 		dao = new TodoDAO(context);
 
 		// actual execution
-		dao.set(1, new Todo(1, "new todo", false));
+		dao.set(1, "updated description");
 
 		// verify
 		verify(getAllConnection, times(1)).prepareStatement(TodoDAO.setQuery);
@@ -103,7 +105,6 @@ public class TodoDAOTest {
 	public void add() throws Exception {
 		PreparedStatement addStatement = mock(PreparedStatement.class);
 		doNothing().when(addStatement).setString(anyInt(), anyString());
-		doNothing().when(addStatement).setInt(anyInt(), anyInt());
 		when(addStatement.executeUpdate()).thenReturn(1);
 
 		Connection getAllConnection = mock(Connection.class);
@@ -115,7 +116,7 @@ public class TodoDAOTest {
 		dao = new TodoDAO(context);
 
 		// actual execution
-		dao.add(new Todo(1, "new todo", false));
+		dao.add("new todo item");
 
 		// verify
 		verify(getAllConnection, times(1)).prepareStatement(TodoDAO.addQuery);
@@ -123,26 +124,47 @@ public class TodoDAOTest {
 	}
 
 	@Test
-	public void remove() throws Exception {
-		PreparedStatement addStatement = mock(PreparedStatement.class);
-		doNothing().when(addStatement).setString(anyInt(), anyString());
-		doNothing().when(addStatement).setInt(anyInt(), anyInt());
-		when(addStatement.executeUpdate()).thenReturn(1);
+	public void complete() throws Exception {
+		PreparedStatement stmt = mock(PreparedStatement.class);
+		doNothing().when(stmt).setInt(anyInt(), anyInt());
+		when(stmt.executeUpdate()).thenReturn(1);
 
-		Connection getAllConnection = mock(Connection.class);
-		when(getAllConnection.prepareStatement(TodoDAO.removeQuery)).thenReturn(addStatement);
+		Connection c = mock(Connection.class);
+		when(c.prepareStatement(TodoDAO.completeQuery)).thenReturn(stmt);
 
 		context = mock(Database.class);
-		when(context.getConnection()).thenReturn(getAllConnection);
+		when(context.getConnection()).thenReturn(c);
 
 		dao = new TodoDAO(context);
 
 		// actual execution
-		dao.remove(1);
+		dao.complete(1);
 
 		// verify
-		verify(getAllConnection, times(1)).prepareStatement(TodoDAO.removeQuery);
-		verify(addStatement, times(1)).executeUpdate();
+		verify(c, times(1)).prepareStatement(TodoDAO.completeQuery);
+		verify(stmt, times(1)).executeUpdate();
+	}
+
+	@Test
+	public void incrementPomodoroCounter() throws Exception {
+		PreparedStatement stmt = mock(PreparedStatement.class);
+		doNothing().when(stmt).setString(anyInt(), anyString());
+		when(stmt.executeUpdate()).thenReturn(1);
+
+		Connection c = mock(Connection.class);
+		when(c.prepareStatement(TodoDAO.incrementPomodoroCounterQuery)).thenReturn(stmt);
+
+		context = mock(Database.class);
+		when(context.getConnection()).thenReturn(c);
+
+		dao = new TodoDAO(context);
+
+		// actual execution
+		dao.incrementPomodoroCounter(1);
+
+		// verify
+		verify(c, times(1)).prepareStatement(TodoDAO.incrementPomodoroCounterQuery);
+		verify(stmt, times(1)).executeUpdate();
 	}
 }
 

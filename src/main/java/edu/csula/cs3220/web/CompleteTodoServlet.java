@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.csula.cs3220.storage.*;
+
 @WebServlet("/todo/complete")
 public class CompleteTodoServlet extends HttpServlet {
-	public void doPost( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	public void doGet( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 		// TODO: handle completing a existing todo item
 	}
 }

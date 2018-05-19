@@ -10,7 +10,7 @@ public class Database {
 	private static final String database = "cs3220_lab";
 	private static final String url = String.format("jdbc:mysql://%s/%s", host, database);
 	private static final String username = "root";
-	private static final String password = "password";
+	private static final String password = "";
 
 	public Database() {
 		try {
