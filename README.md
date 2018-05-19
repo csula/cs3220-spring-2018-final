@@ -24,20 +24,37 @@ And on the front end side of things, you can run the following command under `cl
 npm run build
 ```
 
+### Tests
+
+To run tests on Java side on root directory of the project:
+
+```
+gradle test
+```
+
+To run tests on JavaScript side, run the following command in `client` folder:
+
+```
+npm test
+```
+
 ## Deliverables
 
 | File name | Points |
 | :-- | :-- |
 | `schema.sql` | 0.5 |
-| `TodoDAO.java` | 2 |
+| `TodoDAO.java` | 1.5 |
 | `TodoServlet.java` | 1 |
 | `index.jsp` | 1 |
 | `EditTodoServlet.java` | 1 |
 | `edit.jsp` | 0.5 |
 | `CompleteTodoServlet.java` | 0.5 |
 | `TodoPomodoroServlet.java` | 0.5 |
-| `pomodoro.jsp` | 1 |
-| `pomodoro.js` | 2 |
+| `pomodoro.jsp` | 0.5 |
+| `timer.js` | 0.5 |
+| `utils.js` | 0.5 |
+| `pomodoro.js` | 1 |
+| `app.js` | 1 |
 
 ## Requirements
 
@@ -48,6 +65,7 @@ npm run build
 * No Java code in JSP
 * Use TodoDAO in all Servlets
 * JSP should all be hidden behind `WEB-INF` folder
+* Should pass all unit tests
 
 ### Functional
 
@@ -75,11 +93,16 @@ together. Here is suggested steps to finish this application:
 6. `TodoPomodoroServlet.java`
 	* Render the pomodoro page
 		- Need to import the `app.bundle.js` script
-		- Need to use `pomodoro-timer` _custom element_
+		- Use `pomodoro-timer` _custom element_
+        - Should display both description, pomodoro counter
+        - Pass in the `todo.id` to `window.todoID`
 	* Handle increment pomodoro counter
-7. `pomodoro.js` and pass its unit test
+7. `timer.js` and pass its unit test
+8. `utils.js` and pass its unit test
+9. `pomodoro.js` and pass its unit test
+10. `app.js` and glue every js modules above together
 
-At the end of the implementation, you should have the following urls done:
+At the end of the implementation, you should have the following URLs done:
 
 ```
 GET /todo -> render index page
