@@ -1,7 +1,8 @@
 # CS 3220 Final
 
-In this final, your task is to create a *TODO list application* with _pomodoro
-timer_. If you are not sure what a pomodoro timer is: https://en.wikipedia.org/wiki/Pomodoro_Technique
+In this final, your task is to create a *TODO list application* with simpler
+version of _pomodoro timer_. If you are not sure what a pomodoro timer is:
+https://en.wikipedia.org/wiki/Pomodoro_Technique
 
 ## Demo
 
@@ -9,10 +10,18 @@ timer_. If you are not sure what a pomodoro timer is: https://en.wikipedia.org/w
 
 ## Get Started
 
-To get started, you will need to start off the assignment from https://classroom.github.com/a/cdsA2dZJ
+To get started, you will need to start off the assignment from
+https://classroom.github.com/a/cdsA2dZJ
 
-Once you have cloned the application, you can run the following command to start
+> This should create an additional _private_ repository for you and no one else
+
+Once you have cloned the repository, you can run the following command to start
 off server:
+
+> For those of you who don't remember how to clone the repository, use 
+> `git clone {repositoryURL}` command
+
+### Running the application
 
 ```
 gradle appRun
@@ -23,6 +32,10 @@ And on the front end side of things, you can run the following command under `cl
 ```
 npm run build
 ```
+
+> Upon running the `npm run build` command, it will build the bundled JavaScript
+> file to `/src/main/webapp`. This means that you don't need to manually copy
+> and paste the file to webapp anymore. They are in the right location.
 
 ### Tests
 
@@ -87,16 +100,16 @@ together. Here is suggested steps to finish this application:
 	* Handle adding a new TODO Item in `doPost`
 4. `EditTodoServlet.java`
 	* Render the edit page
-	* Handle editing the existing item
+	* Handle editing the existing item in `doPost`
 5. `CompleteTodoServlet.java`
-	* Handle completing a todo list item
+	* Handle completing a todo list item in `doGet`
 6. `TodoPomodoroServlet.java`
 	* Render the pomodoro page
 		- Need to import the `app.bundle.js` script
 		- Use `pomodoro-timer` _custom element_
         - Should display both description, pomodoro counter
         - Pass in the `todo.id` to `window.todoID`
-	* Handle increment pomodoro counter
+	* Handle increment pomodoro counter in `doPost`
 7. `timer.js` and pass its unit test
 8. `utils.js` and pass its unit test
 9. `pomodoro.js` and pass its unit test
